@@ -7,8 +7,8 @@
 ![GitHub issues](https://img.shields.io/github/languages/code-size/Ysnsn/mimotion?style=flat-square)
 </div>
 
-<details>
-<summary>Github Actions 部署指南</summary>
+
+## Github Actions 部署指南
 
 ### 一、Fork 此仓库
 
@@ -18,9 +18,9 @@
 
 > Settings-->Secrets-->New secret
 
-</details>
+
 
 ## 小米运动修改无效的附解决办法！
-1 进入小米运动 APP 点 - 我的 - 设置 - 账号与安全 - 点注销账号 - 点清除数据-公众号再取关
-2 等 30 分钟后，在重新绑定需要同步的应用，即可继续使用刷步数
-3 ⚠️⚠️：我个人亲测有效
+- 进入小米运动 APP 点 - 我的 - 设置 - 账号与安全 - 点注销账号 - 点清除数据-公众号再取关
+- 等 30 分钟后，在重新绑定需要同步的应用，即可继续使用刷步数
+- ⚠️⚠️：我个人亲测有效
