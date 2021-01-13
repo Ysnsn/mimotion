@@ -1,6 +1,8 @@
 name: 刷步数
 
 on:
+  watch:
+    types: [started]
   push:
     branches: [ master ]
   pull_request:
