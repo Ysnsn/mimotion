@@ -98,9 +98,10 @@ def main(user, passwd, step, sckey):
     
     response = requests.post(url, data=data, headers=head).json()
     #print(response)
-    result = f"[{now}] 修改步数（{step}）"+ response['message']
+    result = f"[{now}] \n小米运动修改步数（{step}）"+ response['message']
     print(result)
     push_wx(sckey, result)
+    push_qq(key, result)
     return result
   
 #获取时间戳
@@ -140,12 +141,31 @@ def push_wx(sckey, desp=""):
             print(f"[{now}] 推送成功。")
         else:
             print(f"[{now}] 推送失败：{json_data['errno']}({json_data['errmsg']})")
+## 推送QQ
+def push_qq(key, desp=""):
+    """
+    推送消息到QQ酷推
+    """
+    if sckey == '':
+        print("[注意] 未提供key，不进行推送！")
+    else:
+        server_url = f"https://push.xuthus.cc/send/{key}?"
+        params = {
+             "c": desp
+        }
+      
+        response = requests.get(server_url, params=params)
 
+     
+        print("QQ酷推 推送成功")
 if __name__ ==  "__main__":
-    # ServerChan
+    # ServerChan sever酱&QQ酷推
     sckey = input()
     if str(sckey) == '0':
         sckey = ''
+    key = input()
+    if str(key) == '0':
+        key = ''
     # 用户名（格式为 13800138000）
     user = input()
     # 登录密码
