@@ -58,7 +58,7 @@ def login(user,password):
     return login_token,userid
  
 #主函数
-def main(user, passwd, step, sckey):
+def main(user, passwd, step, sckey, key):
     user = str(user)
     password = str(passwd)
     step = str(step)
@@ -146,7 +146,7 @@ def push_qq(key, desp=""):
     """
     推送消息到QQ酷推
     """
-    if sckey == '':
+    if key == '':
         print("[注意] 未提供key，不进行推送！")
     else:
         server_url = f"https://push.xuthus.cc/send/{key}?"
@@ -177,5 +177,5 @@ if __name__ ==  "__main__":
         step = str(random.randint(int(setp_array[0]),int(setp_array[1])))
     elif str(step) == '0':
         step = ''
-    main(user, passwd, step, sckey)
+    main(user, passwd, step, sckey, key)
     
