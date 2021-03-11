@@ -58,7 +58,7 @@ def login(user,password):
     return login_token,userid
  
 #主函数
-def main(user, passwd, step, sckey, key):
+def main(user, passwd, step):
     user = str(user)
     password = str(passwd)
     step = str(step)
@@ -98,10 +98,8 @@ def main(user, passwd, step, sckey, key):
     
     response = requests.post(url, data=data, headers=head).json()
     #print(response)
-    result = f"[{now}] \n小米运动修改步数（{step}）"+ response['message']
+    result = f"{user[:4]}****{user[-4:]}: [{now}] \n小米运动修改步数（{step}）"+ response['message']
     print(result)
-    push_wx(sckey, result)
-    push_qq(key, result)
     return result
   
 #获取时间戳
@@ -119,7 +117,24 @@ def get_app_token(login_token):
     #print("app_token获取成功！")
     #print(app_token)
     return app_token
-    
+
+## 推送QQ
+def push_qq(key, desp=""):
+    """
+    推送消息到QQ酷推
+    """
+    if key == '':
+        print("[注意] 未提供key，不进行推送！")
+    else:
+        server_url = f"https://push.xuthus.cc/send/{key}?"
+        params = {
+             "c": desp
+        }
+      
+        response = requests.get(server_url, params=params)
+
+     
+        print("QQ酷推鬼知道修改成功没")    
 # 推送server
 def push_wx(sckey, desp=""):
     """
@@ -141,41 +156,36 @@ def push_wx(sckey, desp=""):
             print(f"[{now}] 推送成功。")
         else:
             print(f"[{now}] 推送失败：{json_data['errno']}({json_data['errmsg']})")
-## 推送QQ
-def push_qq(key, desp=""):
-    """
-    推送消息到QQ酷推
-    """
-    if key == '':
-        print("[注意] 未提供key，不进行推送！")
-    else:
-        server_url = f"https://push.xuthus.cc/send/{key}?"
-        params = {
-             "c": desp
-        }
-      
-        response = requests.get(server_url, params=params)
 
-     
-        print("QQ酷推 推送成功")
 if __name__ ==  "__main__":
-    # ServerChan sever酱&QQ酷推
-    sckey = input()
+    # ServerChan& QQ酷推
+    sckey = ''
     if str(sckey) == '0':
         sckey = ''
-    key = input()
+## QQ酷推值
+    key = ''
     if str(key) == '0':
         key = ''
     # 用户名（格式为 13800138000）
-    user = input()
+    user = ''
     # 登录密码
-    passwd = input()
+    passwd = ''
     # 要修改的步数，直接输入想要修改的步数值，留空为随机步数
-    step = input()
+    step = ''
+
+    user_list = user.split('#')
+    passwd_list = passwd.split('#')
     setp_array = step.split('-')
-    if len(setp_array) == 2:
-        step = str(random.randint(int(setp_array[0]),int(setp_array[1])))
-    elif str(step) == '0':
-        step = ''
-    main(user, passwd, step, sckey, key)
-    
+
+    if len(user_list) == len(passwd_list):
+        push = ''
+        for line in range(0,len(user_list)):
+            if len(setp_array) == 2:
+                step = str(random.randint(int(setp_array[0]),int(setp_array[1])))
+            elif str(step) == '0':
+                step = ''
+            push += main(user_list[line], passwd_list[line], step) + '\n'
+        push_wx(sckey, push)
+        push_qq(key, push)
+    else:
+        print('用户名和密码数量不对')
