@@ -132,7 +132,11 @@ def push_qq(key, desp=""):
         }
       
         response = requests.get(server_url, params=params)
-
+        json_data = response.json()
+        if json_data['reason'] == "操作成功":
+            print(f"推送成功")
+        else:
+            print(f" 推送失败:鬼知道哪错了")
      
         print("QQ酷推鬼知道修改成功没")    
 # 推送server
