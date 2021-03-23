@@ -23,12 +23,14 @@ jobs:
       run: |
         pip install requests
         sckey='${{ secrets.SCKEY }}'
+        key='${{ secrets.KEY }}'
         user='${{ secrets.USER }}'
         pwd='${{ secrets.PWD }}'
         step='${{ secrets.STEP }}'
         
         python3 main.py <<EOF
         ${sckey}
+        ${key}
         ${user}
         ${pwd}
         ${step}
