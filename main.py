@@ -157,7 +157,7 @@ def qywx(msg):
 	print("推鬼知道修改成功没")
 		
 ## 推送QQ
-def push_qq(key, desp=""):
+def push_qq(msg):
     """
     推送消息到QQ酷推
     """
@@ -166,7 +166,7 @@ def push_qq(key, desp=""):
     else:
         server_url = f"https://push.xuthus.cc/send/{key}?"
         params = {
-             "c": desp
+             "c": msg
         }
       
         response = requests.get(server_url, params=params)
@@ -178,7 +178,7 @@ def push_qq(key, desp=""):
      
         print("QQ酷推鬼知道修改成功没")    
 # 推送server
-def push_wx(sckey, desp=""):
+def push_wx(msg):
     """
     推送消息到微信
     """
@@ -188,7 +188,7 @@ def push_wx(sckey, desp=""):
         server_url = f"https://sc.ftqq.com/{sckey}.send"
         params = {
             "text": '小米运动 步数修改',
-            "desp": desp
+            "desp": msg
         }
  
         response = requests.get(server_url, params=params)
@@ -229,8 +229,8 @@ if __name__ ==  "__main__":
             elif str(step) == '0':
                 step = ''
             push += main(user_list[line], passwd_list[line], step) + '\n'
-        push_wx(sckey, push)
-        push_qq(key, push)
+        push_wx(push)
+        push_qq(push)
         qywx(push)
     else:
         print('用户名和密码数量不对')
