@@ -67,8 +67,8 @@ def main(user, passwd, step):
         return
     
     if step == '':
-        print ("已设置为随机步数（10000-19999）")
-        step = str(random.randint(10000,19999))
+        print ("已设置为随机步数（20000-29999）")
+        step = str(random.randint(20000,21999))
     login_token = 0
     login_token,userid = login(user,password)
     if login_token == 0:
@@ -98,7 +98,7 @@ def main(user, passwd, step):
     
     response = requests.post(url, data=data, headers=head).json()
     #print(response)
-    result = f"{user[:4]}****{user[-4:]}: [{now}] \n小米运动修改步数（{step}）"+ response['message']
+    result = f"[{now}] \n{user[:4]}****{user[-4:]}: \n小米运动修改步数（{step}）"+ response['message']
     print(result)
     return result
   
@@ -118,6 +118,44 @@ def get_app_token(login_token):
     #print(app_token)
     return app_token
 
+##
+def qywx(msg):
+	server_url = f"https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={corpid}&corpsecret={corpsecret}"
+	re = requests.post(server_url)
+	jsontxt = json.loads(re.text)
+	access_token = jsontxt['access_token']
+	html = msg.replace('\n', '<br>')
+	url = f"https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={access_token}"
+	data ={"touser" : "@all",
+		   "msgtype" : "mpnews",
+		   "agentid" : "1000002",
+		   "mpnews" : {
+				 "articles" : [
+					   {
+							"title" : "小米运动推送",
+							 "content" : html,
+							 "author" : "智能推送助手",
+							 "thumb_media_id": "2GhsYxtOfHM92u0_WK0iNTjxxes7EAH4-GbAgxfc7YyZt17JEiTfHFkFZ4ob9xL7j",
+							 "content_source_url" : "",
+							 "digest" : msg
+						}
+							   ]
+					   },
+		   "safe": 0
+		  }
+
+	send_msges=(bytes(json.dumps(data), 'utf-8'))
+	res = requests.post(url, send_msges)
+	respon = res.json()   #当返回的数据是json串的时候直接用.json即可将respone转换成字典
+
+	##print (res.text)
+	if respon['errmsg'] == "ok":
+		print(f"推送成功\n")
+	else:
+		 print(f" 推送失败:鬼知道哪错了\n")
+		 
+	print("推鬼知道修改成功没")
+		
 ## 推送QQ
 def push_qq(key, desp=""):
     """
@@ -176,6 +214,8 @@ if __name__ ==  "__main__":
     passwd = ''
     # 要修改的步数，直接输入想要修改的步数值，留空为随机步数
     step = ''
+    corpid = ''
+    corpsecret = ''
 
     user_list = user.split('#')
     passwd_list = passwd.split('#')
@@ -191,5 +231,6 @@ if __name__ ==  "__main__":
             push += main(user_list[line], passwd_list[line], step) + '\n'
         push_wx(sckey, push)
         push_qq(key, push)
+        qywx(push)
     else:
         print('用户名和密码数量不对')
