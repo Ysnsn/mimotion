@@ -99,8 +99,11 @@ def main(user, passwd, step):
     
     response = requests.post(url, data=data, headers=head).json()
     #print(response)
-    result = f"[{now}] \n{user[:4]}****{user[-4:]}: \n小米运动修改步数（{step}）"+ response['message']
+    result = f"[{now}] \n{user[:3]}****{user[-3:]}: \n小米运动修改步数（{step}）"+ response['message']
     print(result)
+    fo = open("foo.txt", "a")
+    fo.write(result)
+    fo.close()
     return result
   
 #获取时间戳
