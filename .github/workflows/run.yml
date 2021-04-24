@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-    - cron: 0 11 * * *
+    - cron: 0 8 * * *
 
 jobs:
   build:
@@ -29,13 +29,7 @@ jobs:
         user='${{ secrets.USER }}'
         pwd='${{ secrets.PWD }}'
         step='${{ secrets.STEP }}'
+        tgbotoken ='${{ secrets.TGBOTOKEN }}'
+        chatid ='${{ secrets.CHATID }}'
         
         python3 main.py <<EOF
-        ${sckey}
-        ${key}
-        ${corpsecret}
-        ${corpid}
-        ${user}
-        ${pwd}
-        ${step}
-        EOF

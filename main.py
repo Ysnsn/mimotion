@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 # python >=3.8
 
-import requests,time,re,json,random
+import requests,time,re,json,random, send
 
 now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 headers = {
@@ -233,8 +233,6 @@ if __name__ ==  "__main__":
             elif str(step) == '0':
                 step = ''
             push += main(user_list[line], passwd_list[line], step) + '\n'
-        push_wx(push)
-        push_qq(push)
-        qywx(push)
+        send.send(push)
     else:
         print('用户名和密码数量不对')
