@@ -205,21 +205,21 @@ def push_wx(msg):
 
 if __name__ ==  "__main__":
     # ServerChan& QQ酷推
-    sckey = ''
+    sckey = os.environ.get("sckey")
     if str(sckey) == '0':
         sckey = ''
 ## QQ酷推值
-    key = ''
+    key = os.environ.get("key")
     if str(key) == '0':
         key = ''
     # 用户名（格式为 13800138000）
-    user = ''
+    user = os.environ.get("user")
     # 登录密码
-    passwd = ''
+    passwd = os.environ.get("pwd")
     # 要修改的步数，直接输入想要修改的步数值，留空为随机步数
-    step = ''
-    corpid = ''
-    corpsecret = ''
+    step = os.environ.get("step")
+    corpid = os.environ.get("corpid")
+    corpsecret = os.environ.get("corpsecret")
 
     user_list = user.split('#')
     passwd_list = passwd.split('#')

@@ -1,12 +1,12 @@
 # -*- coding: utf8 -*-
 # python >=3.8
 import requests,json,time,random
-corpid = ""
-corpsecret = ""
-tgbotoken =""
-chatid =""
-key = ""
-sckey = ""
+corpid = os.environ.get("corpid")
+corpsecret = os.environ.get("corpsecret")
+tgbotoken = os.environ.get("tgbotoken")
+chatid =os.environ.get("chatid")
+key = os.environ.get("key")
+sckey = os.environ.get("sckey")
 
 now = time.strftime("🎃 %Y-%m-%d %H:%M:%S 🎃\n\n", time.localtime())
 msg =""
