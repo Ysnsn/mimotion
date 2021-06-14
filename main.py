@@ -101,9 +101,9 @@ def main(user, passwd, step):
     #print(response)
     result = f"[{now}] \n{user[:3]}****{user[-3:]}: \n小米运动修改步数（{step}）"+ response['message']
     print(result)
-    fo = open("foo.txt", "a")
-    fo.write(result)
-    fo.close()
+   # fo = open("foo.txt", "a")
+   # fo.write(result)
+   # fo.close()
     return result
   
 #获取时间戳
@@ -226,13 +226,16 @@ if __name__ ==  "__main__":
     setp_array = step.split('-')
 
     if len(user_list) == len(passwd_list):
-        push = ''
-        for line in range(0,len(user_list)):
-            if len(setp_array) == 2:
-                step = str(random.randint(int(setp_array[0]),int(setp_array[1])))
-            elif str(step) == '0':
-                step = ''
-            push += main(user_list[line], passwd_list[line], step) + '\n'
-        send.send(push)
+        if user = '' :
+          print("啥也没有，不执行，快去填写账号密码")
+        else ：
+          push = ''
+          for line in range(0,len(user_list)):
+              if len(setp_array) == 2:
+                  step = str(random.randint(int(setp_array[0]),int(setp_array[1])))
+              elif str(step) == '0':
+                  step = ''
+              push += main(user_list[line], passwd_list[line], step) + '\n'
+          send.send(push)
     else:
         print('用户名和密码数量不对')
