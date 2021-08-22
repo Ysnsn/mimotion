@@ -12,6 +12,7 @@
   https://service-8jy2jg0z-1302033217.bj.apigw.tencentcs.com/release/xm?user=手机号&password=密码&step=步数
 
 
+
 ### 把手机号和密码换成自己的就行了，每天 *点一下* 就开始刷了（点一下就行了看返回值，严禁滥用）
 
 
