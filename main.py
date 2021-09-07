@@ -242,7 +242,7 @@ if __name__ ==  "__main__":
     setp_array = step.split('-')
 
     if len(user_list) == len(passwd_list):
-        if user = '' :
+        if user == '' :
           print("啥也没有，不执行，快去填写账号密码")
         else ：
           push = ''
