@@ -220,14 +220,10 @@ def push_wx(msg):
             print(f"[{now}] 推送失败：{json_data['errno']}({json_data['errmsg']})")
 
 if __name__ ==  "__main__":
-    # ServerChan& QQ酷推
+    # ServerChan&
     sckey = os.environ.get("sckey")
     if str(sckey) == '0':
         sckey = ''
-## QQ酷推值
-    key = os.environ.get("key")
-    if str(key) == '0':
-        key = ''
     # 用户名（格式为 13800138000）
     user = os.environ.get("user")
     # 登录密码
